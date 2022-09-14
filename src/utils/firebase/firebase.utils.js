@@ -3,7 +3,8 @@ import {
     getAuth,
     signInWithRedirect,
     signInWithPopup,
-    GoogleAuthProvider
+    GoogleAuthProvider,
+    createUserWithEmailAndPassword
 } from 'firebase/auth'
 
 import {
@@ -39,6 +40,7 @@ const firebaseConfig = {
 export const db  = getFirestore()
 
 export const createUserDocumentFromAuth = async (userAuth) =>{
+    if(!userAuth ) return;
   /**
    * give me a document collection in db:: collection name users:: with ::userAuth.uid
    */
@@ -73,4 +75,11 @@ export const createUserDocumentFromAuth = async (userAuth) =>{
     }
    // if user data exists
    return userDocRef
+}
+
+
+export const createAuthUserWithEmailAndPassword= async (user) =>{
+    // if (!email || !password) end execution
+    if(!user ) return ;
+    return await createUserWithEmailAndPassword(auth,user.email,user.password);
 }
