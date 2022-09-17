@@ -1,10 +1,12 @@
 import {initializeApp} from 'firebase/app'
+
 import {
     getAuth,
     signInWithRedirect,
     signInWithPopup,
     GoogleAuthProvider,
-    createUserWithEmailAndPassword
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword
 } from 'firebase/auth'
 
 import {
@@ -55,7 +57,6 @@ export const createUserDocumentFromAuth = async (userAuth) =>{
    console.log(userSnapshot);
    console.log(userSnapshot.exists());
 
-
    //if user data does not exist
    // create / set the document with the data from userAuth in my collection
    //! the bang operater flipps the condition 
@@ -77,9 +78,23 @@ export const createUserDocumentFromAuth = async (userAuth) =>{
    return userDocRef
 }
 
+/**
+ * @param {*} param0 
+ * @returns 
+ */
 
-export const createAuthUserWithEmailAndPassword= async (user) =>{
+export const createAuthUserWithEmailAndPassword= async ({email,password}) =>{
     // if (!email || !password) end execution
-    if(!user ) return ;
-    return await createUserWithEmailAndPassword(auth,user.email,user.password);
+    if(!email && !password  ) return ;
+    return await createUserWithEmailAndPassword(auth,email,password);
+}
+
+/**
+ * @param {*} param0 
+ * @returns 
+ */
+
+export const  signInAuthUserWithEmailAndPassword =async ({email,password}) =>{
+  if(!email && !password  ) return ;
+  return await signInWithEmailAndPassword(auth,email,password);
 }
