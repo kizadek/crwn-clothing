@@ -6,7 +6,9 @@ import {
     signInWithPopup,
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
 } from 'firebase/auth'
 
 import {
@@ -14,7 +16,6 @@ import {
   doc,
   getDoc,
   setDoc,
-  Firestore
 } from 'firebase/firestore'
 
 // Your web app's Firebase configuration
@@ -98,3 +99,20 @@ export const  signInAuthUserWithEmailAndPassword =async ({email,password}) =>{
   if(!email && !password  ) return ;
   return await signInWithEmailAndPassword(auth,email,password);
 }
+
+
+/**
+ * take not that the auth keeps track of the users we have loged in 
+ */
+export const signOutUser = () => signOut(auth);
+
+
+
+
+// using an observable listener
+/**
+ * it allows as to hook in some kind of a  steam of events 
+ * @param {*} callBack 
+ * @returns 
+ */
+export const onAuthStateChangedsListerner = (callback) => onAuthStateChanged(auth,callback);

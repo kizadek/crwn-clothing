@@ -30,12 +30,10 @@ const SignUpForm = () => {
     }
     try {
       const { user } = await createAuthUserWithEmailAndPassword(formFileds);
-      console.log("new data", user);
-      const userDocRef = await createUserDocumentFromAuth({
+       await createUserDocumentFromAuth({ 
         ...user,
         displayName: formFileds.displayName,
       });
-      console.log("submited", userDocRef);
       // make sur we clear our form fileds
       resetFormFields();
     } catch (error) {
