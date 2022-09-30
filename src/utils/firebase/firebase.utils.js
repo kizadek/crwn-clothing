@@ -2,21 +2,21 @@ import {initializeApp} from 'firebase/app'
 
 import {
     getAuth,
-    signInWithRedirect,
     signInWithPopup,
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged
-} from 'firebase/auth'
+} from 'firebase/auth';
+
 
 import {
   getFirestore,
   doc,
   getDoc,
   setDoc,
-} from 'firebase/firestore'
+} from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -29,7 +29,7 @@ const firebaseConfig = {
   };
   
   // Initialize Firebase
-  const firebaseApp = initializeApp(firebaseConfig);
+  initializeApp(firebaseConfig);
   const provider = new GoogleAuthProvider();
 
   provider.setCustomParameters({
@@ -38,7 +38,6 @@ const firebaseConfig = {
 
   export const auth = getAuth();
   export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
-
 
 export const db  = getFirestore()
 
@@ -107,9 +106,7 @@ export const  signInAuthUserWithEmailAndPassword =async ({email,password}) =>{
 export const signOutUser = () => signOut(auth);
 
 
-
-
-// using an observable listener
+// using an observable listener*
 /**
  * it allows as to hook in some kind of a  steam of events 
  * @param {*} callBack 

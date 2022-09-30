@@ -8,10 +8,8 @@ export const productsContext = createContext({
 })
 
 
-
-
-
 export const ProductsProvider = ({children})=>{
+
     const [products,setProducts] = useState([]);
     const  value = {products}
     //function only runs once when the component mounts
@@ -19,6 +17,7 @@ export const ProductsProvider = ({children})=>{
           setProducts(SHOP_DATA)
     },[])
 
-
     return <productsContext.Provider value={value}>{children}</productsContext.Provider>
+
 }
+
